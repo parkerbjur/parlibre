@@ -3,8 +3,9 @@
   "name": "parlibre",
   "version": "0.0.0",
   "license": "MIT",
+  "homepage": "./",
   "scripts": {
-    "build": "preact build",
+    "build": "preact build --no-prerender",
     "serve": "sirv build --port 8080 --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",
