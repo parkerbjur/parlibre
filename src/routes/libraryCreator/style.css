@@ -1,0 +1,11 @@
+.libraryCreator {
+	padding: 56px 20px;
+	min-height: 100%;
+	width: 100%;
+}
+
+.libraryCreator > * {
+    display: block;
+    margin: 10px 0;
+}
+

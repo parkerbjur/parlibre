@@ -7,6 +7,7 @@ import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import Library from '../routes/library';
+import LibraryCreator from '../routes/libraryCreator';
 
 const App = () => (
 	<div id="app">
@@ -16,6 +17,7 @@ const App = () => (
 			<Profile path="/profile/" user="me" />
 			<Profile path="/profile/:user" />
             <Library path="/library/:library" />
+            <LibraryCreator path="/library/newLibrary" />
 		</Router>
 	</div>
 )
