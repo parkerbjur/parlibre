@@ -7,7 +7,7 @@ phases:
       - echo Installing Node LTS...
       - curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
       - apt install -y nodejs
-  prebuild:
+  pre_build:
     commands:
       # install dependencies
       - echo Installing dependencies...
