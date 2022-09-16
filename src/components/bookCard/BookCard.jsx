@@ -8,6 +8,7 @@ Typography,
 
 const BookCard = (props) => {
     const { title, author, genre, cover } = props.book;
+    console.log(cover);
 
     return (
         <Card sx={{ marginBottom: '1vh' }}>
@@ -15,7 +16,7 @@ const BookCard = (props) => {
                 <Grid container columnSpacing={1}>
                     <Grid item xs={2}>
                         <img 
-                            src={cover} 
+                            src={`https://d237qkgix41sfb.cloudfront.net/${cover}`} 
                             style={{ 
                                 height: 'auto', 
                                 margin:'auto',
