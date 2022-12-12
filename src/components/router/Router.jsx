@@ -12,10 +12,8 @@ class ParlibreRouter extends Router {
    * [More Info](https://via.studio/journal/hosting-a-reactjs-app-with-routing-on-aws-s3)
    */
   sanitizeHashPrefix = () => {
-    console.log('sanitize hash prefix');
     const path = (/#!(\/.*)$/.exec(location.hash) || [])[1];
     if (path) {
-      console.log(path);
       route(path);
     }
   }
