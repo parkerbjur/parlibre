@@ -6,7 +6,7 @@ Typography,
 } from '@mui/material';
 import { route } from 'preact-router';
 
-const mediaURL = process.env.MEDIA_STORAGE_URL;
+const mediaURL = process.env.PREACT_APP_MEDIA_STORAGE_URL;
 
 const LibraryCard = (props) => {
     const { pictureName, name, address, id } = props.library;

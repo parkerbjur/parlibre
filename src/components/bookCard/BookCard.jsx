@@ -5,7 +5,7 @@ CardContent,
 Typography,
 } from '@mui/material';
 
-const mediaURL = process.env.MEDIA_STORAGE_URL
+const mediaURL = process.env.PREACT_APP_MEDIA_STORAGE_URL
 
 const BookCard = (props) => {
     const { title, author, genre, cover } = props.book;

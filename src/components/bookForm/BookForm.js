@@ -3,7 +3,7 @@ import { useState } from 'preact/hooks';
 import axios from 'axios'
 import style from './style.css'
 
-const backendUrl = process.env.BACKEND_REQUEST_URL;
+const backendUrl = process.env.PREACT_APP_BACKEND_REQUEST_URL;
 
 const BookForm = (param) => {
     const { libraryID } = param;

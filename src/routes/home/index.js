@@ -5,7 +5,7 @@ import { Link, route } from 'preact-router';
 import style from './style.css';
 import LibraryList from '../../components/libraryList/LibraryList.jsx';
 
-const backendUrl = process.env.BACKEND_REQUEST_URL;
+const backendUrl = process.env.PREACT_APP_BACKEND_REQUEST_URL;
 
 const Home = () => {
     const [libraries, setLibraries] = useState([]);
