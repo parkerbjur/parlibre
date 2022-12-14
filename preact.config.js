@@ -8,8 +8,9 @@ const environmentVariables = dotenv.config().parsed;
  */
 export default (config, env, helpers) => {
   const { plugin } = helpers.getPluginsByName(config, 'DefinePlugin')[0];
-
+  console.log("---DOTENV SETUP---")
   for (const key in environmentVariables) {
+    console.log(key, environmentVariables[key]);
     plugin.definitions[`process.env.${key}`] = JSON.stringify(environmentVariables[key]);
   }
 }
