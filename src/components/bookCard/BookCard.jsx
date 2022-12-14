@@ -5,6 +5,7 @@ CardContent,
 Typography,
 } from '@mui/material';
 
+const mediaURL = process.env.MEDIA_STORAGE_URL
 
 const BookCard = (props) => {
     const { title, author, genre, cover } = props.book;
@@ -16,7 +17,7 @@ const BookCard = (props) => {
                 <Grid container columnSpacing={1}>
                     <Grid item xs={2}>
                         <img 
-                            src={`https://d237qkgix41sfb.cloudfront.net/${cover}`} 
+                            src={`${mediaURL}/${cover}`}
                             style={{ 
                                 height: 'auto', 
                                 margin:'auto',

@@ -4,17 +4,16 @@ Card,
 CardContent,
 Typography,
 } from '@mui/material';
+import { route } from 'preact-router';
 
+const mediaURL = process.env.MEDIA_STORAGE_URL;
 
 const LibraryCard = (props) => {
     const { pictureName, name, address, id } = props.library;
     
     const LibRedirect = (id) => {
-        console.log(id);
-        window.location.assign(`/library/${id}/`);
+        route(`/library/${id}/`);
     }
-
-    console.log(props.library);
 
     return (
         <Card sx={{ marginBottom: '1vh' }} onClick={() => { LibRedirect(id) }}>
@@ -22,7 +21,7 @@ const LibraryCard = (props) => {
                 <Grid container columnSpacing={1}>
                     <Grid item xs={2}>
                         <img 
-                            src={`https://d237qkgix41sfb.cloudfront.net/${pictureName}`} 
+                            src={`${mediaURL}/${pictureName}`} 
                             style={{ 
                                 height: 'auto', 
                                 margin:'auto',

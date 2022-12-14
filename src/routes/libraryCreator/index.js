@@ -1,8 +1,10 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Autocomplete } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import style from './style.css';
 import AddressInput from '../../components/addressInput/AddressInput.jsx';
 import axios from 'axios'
+
+const backendUrl = process.env.BACKEND_REQUEST_URL;
 
 const LibraryCreator = () => {
     
@@ -21,7 +23,7 @@ const LibraryCreator = () => {
         }
         
         axios.put(
-            `http://parlibre-env.eba-3e823xix.us-west-1.elasticbeanstalk.com/library/create`,
+            `${backendUrl}/library`,
             formData,
             {headers: { 'content-type': 'multipart/form-data'}}
         ).then((res) => {
