@@ -6,16 +6,16 @@ import style from './style.css'
 const backendUrl = process.env.PREACT_APP_BACKEND_REQUEST_URL;
 
 const BookForm = (param) => {
-    const { libraryID } = param;
+    const { libraryID, toggleOpen, updateBookList } = param;
 
     const [ISBN, setISBN] = useState(true);
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');
     const [bookInfo, setBookInfo] = useState({});
 
-    const findBook = (event) => {
+    const findBookByISBN = (event) => {
         event.preventDefault();
-        
+
         const isbn = event.target.isbn.value;
         if (isNaN(isbn) || isbn.length != 10) {
             return;
@@ -25,9 +25,9 @@ const BookForm = (param) => {
         axios.get(`${backendUrl}/isbndb/book/${isbn}`)
         .then((res) => {
             setISBN(false);
-            setAuthor(res.data.book.authors);
-            setTitle(res.data.book.title);
-            setBookInfo(res.data.book);
+            setAuthor(res.data.authors);
+            setTitle(res.data.title);
+            setBookInfo(res.data);
             console.log(res);
         })
     }
@@ -40,7 +40,9 @@ const BookForm = (param) => {
             `${backendUrl}/book`,
             bookInfo
         ).then((res) => {
-            console.log(res);             
+            console.log(res);
+            updateBookList();
+            toggleOpen();
         }).catch((err) => {
             console.log(err);
         })
@@ -51,7 +53,7 @@ const BookForm = (param) => {
             <h3 margin={0}> Add Book </h3>
             
             {ISBN && (
-                <form onSubmit={findBook}>
+                <form onSubmit={findBookByISBN}>
                     <Stack spacing={1}>
                         <TextField 
                             fullWidth 
@@ -64,7 +66,7 @@ const BookForm = (param) => {
                             <Button type="submit" variant="contained">Submit</Button>
                             <Button onClick={()=>setISBN(false)}>No ISBN</Button>
                         </Stack>
-                        <p>The ISBN is a 10 or 13 </p>
+                        <p>The ISBN is a 10 or 13 digit code often printed next to the book's barcode</p>
                     </Stack>
                 </form>
             )}
@@ -78,7 +80,6 @@ const BookForm = (param) => {
                         id="title" 
                         label="Title" 
                         variant="outlined" 
-                        required
                     />
                     <TextField 
                         value={author}

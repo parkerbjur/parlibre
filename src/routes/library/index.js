@@ -15,30 +15,43 @@ const Library = ({ library }) => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
+        pullBookList();
+    }, [library]);
+
+    const pullBookList = () => {
         axios.get(`${backendUrl}/library/${library}`).then((res) => {
             setBooks(res.data);
         }).catch((err) => {
             console.log(err);
         })
-    }, [library]);
+    }
 
-    const buttonAction = () => {
-        alert("button pressed");
+    const updateBookList = () => {pullBookList()};
+
+    const removeBook = (id) => {
+        setBooks(books.filter(book => book.id != id ))
     }
 
     return (
 		<div class={style.profile}>
 			<h1>Library Name: { library }</h1>
 			<p>welcome to { library }.</p>
-            <Button variant='contained' onClick={buttonAction} sx={{ margin: '5px', mb: '15px' }}> Check-Out </Button>
             <Button variant='outlined' onClick={() => setOpen(true)} sx={{ margin: '5px', mb: '15px' }}> Deposit </Button>
-            <BookList books={books} />
+            <BookList 
+                books={books}
+                updateBookList = {updateBookList}
+                removeBook = {(id) => removeBook(id)}
+            />
             <Dialog
                 open={open}
                 onClose={() => setOpen(false)}
                 fullWidth
             >
-                <BookForm libraryID={library} />
+                <BookForm 
+                    libraryID={library} 
+                    toggleOpen={() => setOpen(!open)}
+                    updateBookList={updateBookList}
+                />
             </Dialog>
 		</div>
 	);

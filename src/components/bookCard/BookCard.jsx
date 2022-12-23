@@ -3,13 +3,28 @@ Grid,
 Card,
 CardContent,
 Typography,
+Button,
 } from '@mui/material';
+import axios from 'axios';
 
-const mediaURL = process.env.PREACT_APP_MEDIA_STORAGE_URL
+const backendUrl = process.env.PREACT_APP_BACKEND_REQUEST_URL;
 
 const BookCard = (props) => {
-    const { title, author, genre, cover } = props.book;
-    console.log(cover);
+    const { removeBook } = props;
+    const { id, title, authors, genre, cover } = props.book;
+
+    const checkOutBook = (id) => {
+    
+        axios.post(
+            `${backendUrl}/library/1/books/${id}`,
+            {libraryId: 0}
+        ).then((res) => {
+            removeBook(id);
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        })
+    };
 
     return (
         <Card sx={{ marginBottom: '1vh' }}>
@@ -17,7 +32,7 @@ const BookCard = (props) => {
                 <Grid container columnSpacing={1}>
                     <Grid item xs={2}>
                         <img 
-                            src={`${mediaURL}/${cover}`}
+                            src={`${cover}`}
                             style={{ 
                                 height: 'auto', 
                                 margin:'auto',
@@ -33,13 +48,17 @@ const BookCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="p" color="text.secondary" sx={{ fontSize: 14}}>
-                                by: {author}
+                                by: {authors}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
+                            {genre && 
                             <Typography variant="p" color="text.secondary" sx={{ fontSize: 14 }}>
                                 genre: {genre}
-                            </Typography>
+                            </Typography>}
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button variant='contained' onClick={() => checkOutBook(id)} sx={{ margin: '5px', mb: '15px' }}> Check-Out </Button>
                         </Grid>
                     </Grid>
                </Grid>
